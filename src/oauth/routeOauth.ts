@@ -3,6 +3,6 @@ import UserCtrl from "../oauth/userCtrl";
 
 const router = express.Router();
 
-router.post("/mailing", UserCtrl.forgotPassword);
+router.get("/mailing", UserCtrl.notification);
 
 module.exports = router;

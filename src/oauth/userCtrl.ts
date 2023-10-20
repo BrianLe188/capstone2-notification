@@ -5,18 +5,18 @@ import { Request, Response } from "express";
 // const { CLIENT_URL } = process.env;
 
 interface UserCtrl {
-  forgotPassword: (req: Request, res: Response) => Promise<any>;
+  notification: (req: Request, res: Response) => Promise<any>;
 }
 
 const userCtrl: UserCtrl = {
-  forgotPassword: async (req: Request<any>, res: Response<any>) => {
+  notification: async (req: Request<any>, res: Response<any>) => {
     try {
-      const email: string = "ngohuydn123@gmail.com"; // Added type annotation
+      const email: string = "ngohuydn123@gmail.com";
 
-      const url: string = ""; // Added type annotation
+      const url: string = "";
 
-      await sendEmail(email, url, "Notification!");
-      res.json({ msg: "Hi" });
+      const info = await sendEmail(email, url, "Notification!");
+      res.json({ msg: "successful!" });
     } catch (e: any) {
       return res.status(500).json({ msg: e.message });
     }

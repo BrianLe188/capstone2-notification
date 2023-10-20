@@ -7,7 +7,9 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/user", require("./oauth/routeOauth"));
+app.use("/user", require("./src/oauth/routeOauth"));
+
+// access /user/mailing to send mail
 
 const PORT = process.env.PORT || 5000;
 
