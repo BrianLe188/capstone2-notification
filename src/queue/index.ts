@@ -10,15 +10,14 @@ const queue = async ({ channel }: { channel: Channel }) => {
     mailQueue,
     (msg) => {
       if (msg?.content) {
-        const { email, cccd, form } = JSON.parse(msg.content.toString());
-        if (email && cccd && form) {
-          sendEmail(email);
+        const { email, cccd, application } = JSON.parse(msg.content.toString());
+        if (email && cccd && application) {
+          sendEmail(email, application);
         }
       }
-      channel.ack(msg as Message);
     },
     {
-      noAck: false,
+      noAck: true,
     }
   );
 };
