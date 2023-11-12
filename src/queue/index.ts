@@ -1,4 +1,4 @@
-import { Channel, Message } from "amqplib";
+import { Channel } from "amqplib";
 import sendEmail from "../oauth/sendMail";
 
 const queue = async ({ channel }: { channel: Channel }) => {
@@ -10,9 +10,15 @@ const queue = async ({ channel }: { channel: Channel }) => {
     mailQueue,
     (msg) => {
       if (msg?.content) {
-        const { email, cccd, application } = JSON.parse(msg.content.toString());
+        const { email, cccd, application, type } = JSON.parse(
+          msg.content.toString()
+        );
         if (email && cccd && application) {
-          sendEmail(email, application);
+          if (type === "apply_success") {
+            sendEmail(email, application);
+          }
+          if (type === "congratuation") {
+          }
         }
       }
     },
